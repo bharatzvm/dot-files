@@ -1,4 +1,6 @@
+alias lla='ls -altr'
 alias gst='git status'
 alias gd='git diff'
+alias gdc='git diff --cached'
 alias ga='git add'
 alias gc='git commit'

@@ -16,3 +16,7 @@ export GIT_PS1_SHOWDIRTYSTATE=1
 export PS1="$purple\u$green\$(__git_ps1)$blue \W $ $reset"
 
 export PATH="$HOME/.cargo/bin:$PATH"
+
+source /home/bp/.oc_completion.sh
+
+export PATH=$PATH:/opt/openshift

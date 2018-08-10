@@ -65,3 +65,7 @@ alias dps='docker ps -a'
 alias dim='docker images -a'
 alias dcc='docker ps -aq -f status=exited | xargs docker rm'
 alias dic='docker images -f "dangling=true" -q | xargs docker rmi'
+
+# pbcopy Linux
+# sudo apt install xclip
+alias pbcopy='xclip -sel clip'

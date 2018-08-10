@@ -32,6 +32,9 @@ Plugin 'honza/vim-snippets'
 " Webapi
 Plugin 'mattn/webapi-vim'
 
+" Colorschemes
+Plugin 'flazz/vim-colorschemes'
+
 " Javascript syntax and indent
 Plugin 'pangloss/vim-javascript.git'
 
@@ -184,8 +187,31 @@ set showmatch
 " How many tenths of a second to blink when matching brackets
 set mat=1
 
+" SSH colorsupport
+set t_Co=256
+
 " Light background
-" colorscheme Pablo
+" colorscheme Chasing_Logic
+" colorscheme apprentice
+" colorscheme cake1616
+" colorscheme calmar256-dark
+" colorscheme colorsbox-faff
+" colorscheme crayon
+" colorscheme corporation
+" colorscheme eva
+" colorscheme eva01
+" colorscheme enigma
+" colorscheme flatcolor
+" colorscheme flatui
+" colorscheme getafe
+" colorscheme goodwolf
+colorscheme gruvbox
+" colorscheme hemisu
+" colorscheme hotpot
+" colorscheme hybrid
+" colorscheme hybrid-light
+" colorscheme hybrid_material
+" colorscheme jellyx
 
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
@@ -280,3 +306,8 @@ let g:UltiSnipsSnippetDirectories=['snips', 'UltiSnips']
 
 " Rust doc
 let g:rust_doc#downloaded_rust_doc_dir = '/home/bp/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/'
+
+" ALE Message Format
+let g:ale_echo_msg_error_str = 'Error'
+let g:ale_echo_msg_warning_str = 'Warning'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'

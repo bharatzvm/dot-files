@@ -29,9 +29,10 @@ alias glol='git log --pretty=oneline'
 
 alias gsh='git stash'
 alias gsl='git stash list'
-# alias gC='systemd-ask-password --no-output '\''Are you sure about this: '\'' && git checkout'
+alias gC='systemd-ask-password --no-output '\''Are you sure about this: '\'' && git checkout'
+# alias 'git checkout'='systemd-ask-password --no-output '\''Are you sure about this: '\'' && git checkout'
 
-alias gC='git checkout'
+# alias gC='git checkout'
 alias gco='git checkout -'
 
 alias gpr='git pull -r'
@@ -40,7 +41,7 @@ alias gpm='git push origin master'
 
 # alias localdb='mysql --defaults-extra-file=/home/bp/.sql/local'
 # alias brightness="sudo tee /sys/class/backlight/intel_backlight/brightness <<<"
-# alias rm="systemd-ask-password --no-output 'Are you sure about this: ' && rm"
+alias rm="systemd-ask-password --no-output 'Are you sure about this: ' && rm"
 
 alias vi="vim"
 
@@ -69,3 +70,9 @@ alias dic='docker images -f "dangling=true" -q | xargs docker rmi'
 # pbcopy Linux
 # sudo apt install xclip
 alias pbcopy='xclip -sel clip'
+
+alias ns='npm start'
+
+# g++
+alias gcc='g++ -Wall -Wextra -Werror '
+alias g++='g++ -Wall -Wextra -Werror '

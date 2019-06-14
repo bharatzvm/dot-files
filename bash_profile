@@ -18,7 +18,10 @@ export PS1="$purple\u$green\$(__git_ps1)$blue \W $ $reset"
 export PATH="$HOME/.cargo/bin:$PATH"
 
 if [ -f /home/bp/.oc_completion.sh ]; then
-    . /home/bp/.oc_completion.sh
-    export PATH=$PATH:/opt/openshift
+  . /home/bp/.oc_completion.sh
+  export PATH=$PATH:/opt/openshift
 fi
 
+if [ -f /usr/local/ibmcloud/bx/bash_autocomplete ]; then
+  . /usr/local/ibmcloud/bx/bash_autocomplete
+fi

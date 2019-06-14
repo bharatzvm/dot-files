@@ -59,18 +59,32 @@ Plugin 'leafgarland/typescript-vim'
 " Typescript Language services
 Plugin 'Quramy/tsuquyomi'
 
-call vundle#end()
+" For managing YCM & ulti snips
+" Plugin 'ervandew/supertab'
 
+" YouCompleteMe
+" Plugin 'Valloric/YouCompleteMe'
+
+" Markdown
+" Plugin 'tpope/vim-markdown'
+
+Plugin 'plasticboy/vim-markdown'
+
+
+call vundle#end()
 
 " Overrule highlight settings by defult vim settings
 syntax on
 
 
 " Add dictionary of words used
-set dictionary-=/usr/share/dict/words dictionary+=/home/bp/.dict/words
+" set dictionary-=/usr/share/dict/words dictionary+=/home/bp/.dict/words
 
 " Complete option - ctrl-n/ctrl-p use dictionary
-set complete+=k
+" set complete+=k
+
+" Omnicompletion
+" set omnifunc=syntaxcomplete#Complete
 
 " Tab - space fight
 set shiftwidth=2 tabstop=2 expandtab softtabstop=0 smarttab
@@ -80,6 +94,12 @@ nnoremap <leader>b :CtrlPBuffer<CR>
 
 " Ctrl + p Reindex
 nnoremap <leader>r :CtrlPClearCache<CR>
+
+" Ctrlp ignore
+let g:ctrlp_custom_ignore='node_modules'
+
+" Ctrlp filename mode
+let g:ctrlp_by_filename = 1
 
 " To use project specific setting every project can have its own vimrc file
 set exrc
@@ -132,7 +152,7 @@ set history=200
 " show the cursor position all the time
 set ruler
 
-" display incomplete commands
+" display incomplete commands in last line - key mappings using leader
 set showcmd
 
 " display completion matches in a status line
@@ -191,7 +211,7 @@ set mat=1
 set t_Co=256
 
 " Light background
-" colorscheme Chasing_Logic
+colorscheme Chasing_Logic
 " colorscheme apprentice
 " colorscheme cake1616
 " colorscheme calmar256-dark
@@ -205,7 +225,7 @@ set t_Co=256
 " colorscheme flatui
 " colorscheme getafe
 " colorscheme goodwolf
-colorscheme gruvbox
+" colorscheme gruvbox
 " colorscheme hemisu
 " colorscheme hotpot
 " colorscheme hybrid
@@ -308,6 +328,137 @@ let g:UltiSnipsSnippetDirectories=['snips', 'UltiSnips']
 let g:rust_doc#downloaded_rust_doc_dir = '/home/bp/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/'
 
 " ALE Message Format
+let g:ale_sign_error = '✖'
+let g:ale_sign_warning = '⚠'
 let g:ale_echo_msg_error_str = 'Error'
 let g:ale_echo_msg_warning_str = 'Warning'
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_echo_msg_format = '[%linter%] [%code%] %s [%severity%]'
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['eslint'],
+\}
+
+let g:ale_linters = {}
+let g:ale_linters.typescript = [
+\ 'tslint',
+\ 'tsserver',
+\]
+
+let g:ale_linters.javascript = [
+\ 'eslint',
+\ 'tsserver'
+\]
+
+let g:ale_fixers.json = [
+\ 'prettier',
+\ 'remove_trailing_lines',
+\ 'trim_whitespace'
+\]
+
+" ALE Gotofile
+nnoremap <leader>dg :ALEGoToDefinition<CR>
+nnoremap <leader>gd :ALEGoToDefinitionInTab<CR>
+nnoremap <leader>j :ALENext<CR>
+nnoremap <leader>k :ALEPrevious<CR>
+nnoremap <Leader>lf :ALEFix<CR>
+
+" copy selection
+" '<,'>!tee >(xclip -sel clip)
+
+" Sudo save
+" :w !sudo tee %
+
+" Auto set conf files filetype
+autocmd BufNewFile,BufRead *.conf set filetype=conf
+
+" go to file in current window - normal mode
+" gf
+
+" go to file in new window - normal mode
+" <c-w>f
+
+" go to file in new tab - normal mode
+" <c-w>gf
+
+" Open buffers in new tab - vimgrep
+set switchbuf+=usetab,newtab
+
+" Timestamp Complicated
+" let g:time_stamp_enabled = 0
+" let g:time_stamp_start = 0
+" command! TimeStampToggle call TimeStampToggle()
+
+" function TimeStampToggle()
+"   let g:time_stamp_enabled = !g:time_stamp_enabled
+"   let g:time_stamp_start = strftime("%s") 
+"      " Time in seconds since the Unix epoch
+" endfunction
+
+" inoremap <expr> <CR> g:time_stamp_enabled ? "\<ESC>:call TimeStamp()\<CR>a" : "\<CR>"
+
+" function! TimeStamp()
+"      let l:current_sec = printf("%02d", strftime("%s") - g:time_stamp_start)
+"      let l:current_min = 0
+"      let l:current_hr  = 0
+
+"      while l:current_sec >= 60
+"        let l:current_sec -= 60
+"        let l:current_min += 1
+"      endwhile
+
+"      while l:current_min >= 60
+"        let l:current_min -= 60
+"        let l:current_hr  += 1
+"      endwhile
+
+"      let l:current_sec = printf("%02d", l:current_sec)
+"      let l:current_min = printf("%02d", l:current_min)
+"      let l:current_hr  = printf("%02d", l:current_hr)
+
+"      " Go to the beginning of the line,
+"      " print the current zero-padded time,
+"      " print `  -  ` as a separator
+"      " and move the cursor over for the next line (with separator)
+"      execute "normal! 0i\<SPACE>\<ESC>0dwi\
+"            \<C-R>=l:current_hr\<CR>:\<C-R>=l:current_min\<CR>:\<C-R>=l:current_sec \<CR>\
+"            \<SPACE>\<SPACE>—\<SPACE>\<SPACE>\<ESC>o\<SPACE>\<SPACE>\<SPACE>\<SPACE>\
+"            \<SPACE>\<SPACE>\<SPACE>\<SPACE>\<SPACE>\<SPACE>\<SPACE>\<SPACE>\<SPACE>"
+
+"  endfunction
+
+" Timestamp simple
+let g:time_stamp_enabled = 0
+command! TimeStampToggle let g:time_stamp_enabled = !g:time_stamp_enabled
+
+function! TimeStampToggleFunction()
+  let g:time_stamp_enabled = !g:time_stamp_enabled
+endfunction
+
+inoremap <expr> <CR> g:time_stamp_enabled ? "\<ESC>:call TimeStamp()\<CR>a" : "\<CR>"
+
+function! TimeStamp()
+     let l:current_time = strftime("%b %d %Y %H:%M:%S")
+     execute "normal! 0i\<SPACE>\<ESC>0dwi\<C-R>=l:current_time\<CR>\<ESC>o\<SPACE>\<SPACE>"
+endfunction
+
+" " YCM Conf
+" let g:ycm_global_ycm_extra_conf = '~/.global_extra_conf.py'
+" let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+" let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+" let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" " Better key bindings for UltiSnipsExpandTrigger
+" let g:UltiSnipsExpandTrigger = "<tab>"
+" let g:UltiSnipsJumpForwardTrigger = "<Right>"
+" let g:UltiSnipsJumpBackwardTrigger = "<Left>"
+
+" Markdown options for plastic-boy
+let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_no_default_key_mappings = 1
+
+" Get filetype
+" set filetype?
+
+" Jumping
+" Jump to tag using <CTRL-]>
+" Jump Back and forth using <CTRL-I> <CTRL-O>

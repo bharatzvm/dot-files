@@ -1,0 +1,19 @@
+snippet in "Named import"
+import { $1 } from '$2';
+endsnippet
+
+snippet log "console.log"
+console.log($0);
+endsnippet
+
+snippet st "stringify"
+JSON.stringify($0, null, 4);
+endsnippet
+
+snippet ls "log stringified object"
+console.log(JSON.stringify($0, null, 4));
+endsnippet
+
+snippet ld "logger stringified object"
+logger.debug(req.id)(JSON.stringify($0, null, 4));
+endsnippet
